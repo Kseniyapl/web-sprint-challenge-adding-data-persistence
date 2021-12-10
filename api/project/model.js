@@ -19,14 +19,18 @@ const get = async () => {
     return result;
 }
 const getById = async id => {
-    const result = await db('projects').select().where('project_id', id).first();
-    return result;
+    const result = await db('projects').where('project_id', id).first();
+    return {
+        ...result, 
+        project_completed: result.project_completed ? true : false
+    }
 }
-
-  
-
+const create = async(project) => {
+    const [id] = await db('projects').insert(project)
+    return getById(id)
+}
 module.exports = {
     get,
     getById,
-    
+    create
 }
