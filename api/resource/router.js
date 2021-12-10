@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
         })
         .catch(next);
 })
-router.post('/', async (req, res, next) =>{
+router.post('/', (req, res, next) =>{
     Resource.create(req.body)
     .then(resource => {
         res.status(201).json(resource);
